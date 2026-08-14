@@ -2,7 +2,6 @@
 
 A Sangam Tamil poetry engine, built for the AWS Builder Center Weekend Creative Challenge.
 
-**Live:** https://master.d32feklve3ga6y.amplifyapp.com/
 
 Classical Tamil poetics classifies every human situation into five *thinai* (landscapes). Each thinai has a fixed set of conventional images — flower, bird, time of day, deity, occupation — and the emotion is never stated directly, it is carried entirely by the landscape imagery.
 
