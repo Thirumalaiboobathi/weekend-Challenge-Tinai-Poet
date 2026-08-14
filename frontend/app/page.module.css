@@ -1,0 +1,55 @@
+.page {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-family: var(--font-poem), Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.tabs {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tab {
+  padding: 0 0 0.65rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--color-muted);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.tab:hover {
+  color: var(--color-fg);
+}
+
+.tabActive {
+  color: var(--color-fg);
+  border-bottom-color: var(--color-accent);
+}
+
+@media (min-width: 640px) {
+  .page {
+    padding-top: 4.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AmplifyEnvVarSecrets",
+      "Effect": "Allow",
+      "Action": ["ssm:GetParametersByPath", "ssm:GetParameter", "ssm:GetParameters"],
+      "Resource": "arn:aws:ssm:ap-south-1:675613597178:parameter/amplify/d32feklve3ga6y/*"
+    }
+  ]
+}

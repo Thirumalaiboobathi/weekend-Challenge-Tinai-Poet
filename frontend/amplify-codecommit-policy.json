@@ -1,0 +1,10 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["codecommit:GitPull", "codecommit:GetRepository", "codecommit:GetBranch"],
+      "Resource": "arn:aws:codecommit:ap-south-1:675613597178:tinai-poet"
+    }
+  ]
+}

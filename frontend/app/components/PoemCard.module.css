@@ -1,0 +1,51 @@
+.card {
+  padding: 2rem 1.75rem;
+  border-radius: 1rem;
+  border: 1px solid var(--card-accent, var(--color-border));
+  background: var(--card-bg, var(--color-surface));
+  color: var(--card-text, var(--color-fg));
+  transition: background-color 0.6s ease, border-color 0.6s ease, color 0.6s ease;
+}
+
+.cardInner {
+  animation: emerge 0.5s ease;
+}
+
+@keyframes emerge {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.7rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--card-bg, var(--color-surface));
+  background: var(--card-accent, var(--color-accent));
+  border-radius: 999px;
+}
+
+.poemTamil {
+  font-family: var(--font-tamil), "Noto Sans Tamil", sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.95;
+  white-space: pre-line;
+  margin-bottom: 1.25rem;
+}
+
+.poem {
+  font-family: var(--font-poem), Georgia, serif;
+  font-size: 1.15rem;
+  line-height: 1.85;
+  white-space: pre-line;
+}

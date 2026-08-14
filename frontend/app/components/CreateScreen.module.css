@@ -1,0 +1,122 @@
+.subtitle {
+  margin-bottom: 2rem;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.textarea {
+  width: 100%;
+  min-height: 6.5rem;
+  resize: vertical;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--color-fg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.6rem;
+  transition: border-color 0.2s ease;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.textarea::placeholder {
+  color: #a8a294;
+}
+
+.submit {
+  align-self: flex-start;
+  margin-top: 0.25rem;
+  padding: 0.75rem 1.6rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--color-accent);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.submit:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
+.submit:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.submit:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.error {
+  margin-top: 1.5rem;
+  padding: 0.9rem 1rem;
+  font-size: 0.9rem;
+  color: #7a2e22;
+  background: #fbeee9;
+  border: 1px solid #f0cfc4;
+  border-radius: 0.5rem;
+}
+
+.result {
+  margin-top: 2.5rem;
+}
+
+.details {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--card-accent, var(--color-border));
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--card-accent, var(--color-accent));
+  list-style: none;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.summary::after {
+  content: "↓";
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+.details[open] .summary::after {
+  transform: rotate(180deg);
+}
+
+.reason {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--card-text, var(--color-fg));
+  opacity: 0.85;
+}

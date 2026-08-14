@@ -1,0 +1,43 @@
+.subtitle {
+  margin-bottom: 1.5rem;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.loading,
+.empty {
+  padding: 2.5rem 0;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.error {
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+  font-size: 0.9rem;
+  color: #7a2e22;
+  background: #fbeee9;
+  border: 1px solid #f0cfc4;
+  border-radius: 0.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.situation {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--card-accent, var(--color-border));
+  font-size: 0.85rem;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+@media (min-width: 700px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

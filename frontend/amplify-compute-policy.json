@@ -1,0 +1,23 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "BedrockInvoke",
+      "Effect": "Allow",
+      "Action": ["bedrock:InvokeModel", "bedrock:Converse"],
+      "Resource": [
+        "arn:aws:bedrock:ap-south-1::foundation-model/amazon.nova-pro-v1:0",
+        "arn:aws:bedrock:ap-south-1:675613597178:inference-profile/apac.amazon.nova-pro-v1:0",
+        "arn:aws:bedrock:*::foundation-model/amazon.nova-pro-v1:0",
+        "arn:aws:bedrock:ap-south-1:675613597178:inference-profile/global.anthropic.claude-opus-4-5-20251101-v1:0",
+        "arn:aws:bedrock:*::foundation-model/anthropic.claude-opus-4-5-20251101-v1:0"
+      ]
+    },
+    {
+      "Sid": "DynamoDbAccess",
+      "Effect": "Allow",
+      "Action": ["dynamodb:PutItem", "dynamodb:GetItem", "dynamodb:UpdateItem", "dynamodb:Scan", "dynamodb:Query"],
+      "Resource": "arn:aws:dynamodb:ap-south-1:675613597178:table/TinaiPoet"
+    }
+  ]
+}
