@@ -1,5 +1,5 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient, PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBDocumentClient, GetCommand, PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 import type { ThinaiKey } from "./thinai";
 import type { WeatherReading } from "./weatherThinai";
 
@@ -40,6 +40,16 @@ export async function getRecentDailyPoems(limit: number): Promise<DailyRecord[]>
   );
   const items = (res.Items ?? []) as DailyRecord[];
   return items.sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, limit);
+}
+
+// Point lookup for one date — used by the backfill script (backfill.ts) to
+// check what's already there before writing, so it never overwrites a real
+// scheduled entry with a backfilled one.
+export async function getDailyPoem(date: string): Promise<DailyRecord | null> {
+  const res = await ddb.send(
+    new GetCommand({ TableName: TABLE_NAME, Key: { PK: `DAILY#${date}`, SK: "META" } })
+  );
+  return (res.Item as DailyRecord | undefined) ?? null;
 }
 
 export async function putDailyPoem(record: DailyRecord): Promise<void> {

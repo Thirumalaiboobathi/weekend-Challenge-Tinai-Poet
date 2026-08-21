@@ -153,3 +153,36 @@ export async function fetchMaduraiWeather(): Promise<WeatherReading> {
     windSpeed: c.wind_speed_10m,
   };
 }
+
+// Phase 5: historical reading for a specific past date, against Open-Meteo's
+// archive endpoint rather than the forecast one above — used by backfill.ts
+// only. Reads the same 06:00 IST hour the live agent reads at, so a
+// backfilled day is mapped by the same rule a real run would have used.
+export async function fetchMaduraiWeatherForDate(date: string): Promise<WeatherReading> {
+  const url =
+    `https://archive-api.open-meteo.com/v1/archive` +
+    `?latitude=${MADURAI_LATITUDE}&longitude=${MADURAI_LONGITUDE}` +
+    `&start_date=${date}&end_date=${date}` +
+    `&hourly=temperature_2m,relative_humidity_2m,precipitation,cloud_cover,wind_speed_10m` +
+    `&timezone=Asia%2FKolkata`;
+
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`Open-Meteo archive request failed for ${date}: ${res.status} ${res.statusText}`);
+  }
+  const data = await res.json();
+  const h = data.hourly;
+  const idx: number = h?.time?.findIndex((t: string) => t.endsWith("T06:00")) ?? -1;
+  if (idx === -1) {
+    throw new Error(`No 06:00 IST reading found for ${date}`);
+  }
+
+  return {
+    time: h.time[idx],
+    temperature: h.temperature_2m[idx],
+    humidity: h.relative_humidity_2m[idx],
+    precipitation: h.precipitation[idx],
+    cloudCover: h.cloud_cover[idx],
+    windSpeed: h.wind_speed_10m[idx],
+  };
+}
