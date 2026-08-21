@@ -9,7 +9,7 @@
 import { randomUUID } from "node:crypto";
 import { THINAI, ThinaiKey } from "./thinai";
 import { classifyThinai, writeStanza } from "./bedrock";
-import { putPoem, getScore, putScore, getRecentPoems } from "./dynamo";
+import { putPoem, getScore, putScore, getRecentPoems, getRecentDailyPoems } from "./dynamo";
 import {
   classifyThinaiFallback,
   writeStanzaFallback,
@@ -20,7 +20,12 @@ import {
 
 const MAX_SITUATION_LENGTH = 400;
 const GALLERY_LIMIT = 20;
+const DAILY_ARCHIVE_LIMIT = 14;
 const USE_BEDROCK = process.env.USE_BEDROCK === "true";
+
+function todayIST(): string {
+  return new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
+}
 
 export interface ShapedResponse {
   statusCode: number;
@@ -91,6 +96,13 @@ async function handleGallery(): Promise<ShapedResponse> {
   return { statusCode: 200, payload: { poems } };
 }
 
+async function handleToday(): Promise<ShapedResponse> {
+  const recent = await getRecentDailyPoems(DAILY_ARCHIVE_LIMIT);
+  const archive = recent.map((r) => ({ ...r, thinaiData: THINAI[r.thinai] }));
+  const today = archive.find((r) => r.date === todayIST()) ?? null;
+  return { statusCode: 200, payload: { today, archive } };
+}
+
 export async function handleRequest(body: Record<string, unknown>): Promise<ShapedResponse> {
   try {
     switch (body.mode) {
@@ -102,6 +114,8 @@ export async function handleRequest(body: Record<string, unknown>): Promise<Shap
         return await handleScore(body);
       case "gallery":
         return await handleGallery();
+      case "today":
+        return await handleToday();
       default:
         return errorResponse(400, `mode "${body.mode as string}" is not implemented yet`);
     }

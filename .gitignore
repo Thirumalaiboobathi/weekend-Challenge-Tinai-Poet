@@ -55,6 +55,11 @@ desktop.ini
 .idea/
 *.swp
 
+# Agent Lambda build artifacts
+agent/dist/
+agent/package/
+agent/function.zip
+
 # Scratch
 scratchpad/
 tmp/

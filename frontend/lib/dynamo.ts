@@ -97,3 +97,44 @@ export async function putScore(sessionId: string, state: ScoreState): Promise<vo
     })
   );
 }
+
+export interface DailyWeatherReading {
+  time: string;
+  temperature: number;
+  humidity: number;
+  precipitation: number;
+  cloudCover: number;
+  windSpeed: number;
+}
+
+// Written by the daily agent Lambda (agent/dynamo.ts) under PK: DAILY#<date>,
+// SK: "META" — read-only from this app's side, this app never writes to
+// DAILY# items. Field shape kept in sync by hand with agent/dynamo.ts's
+// DailyRecord, same cross-deploy-unit duplication as thinai.ts (see
+// DECISIONS.md).
+export interface DailyRecord {
+  date: string;
+  thinai: string;
+  rule: string;
+  weather: DailyWeatherReading;
+  poem: string;
+  poemTamil: string;
+  imagery: string[];
+  createdAt: string;
+  backfilled?: boolean;
+}
+
+// Same "scan the whole table, filter/sort in application code" choice as
+// getRecentPoems above, for the same reason — this table also holds
+// POEM# and SCORE# items, and item counts here are small.
+export async function getRecentDailyPoems(limit: number): Promise<DailyRecord[]> {
+  const res = await ddb.send(
+    new ScanCommand({
+      TableName: TABLE_NAME,
+      FilterExpression: "begins_with(PK, :p)",
+      ExpressionAttributeValues: { ":p": "DAILY#" },
+    })
+  );
+  const items = (res.Items ?? []) as DailyRecord[];
+  return items.sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, limit);
+}

@@ -4,14 +4,16 @@ import { useState } from "react";
 import CreateScreen from "./components/CreateScreen";
 import PlayScreen from "./components/PlayScreen";
 import GalleryScreen from "./components/GalleryScreen";
+import TodayScreen from "./components/TodayScreen";
 import styles from "./page.module.css";
 
-type Tab = "create" | "play" | "gallery";
+type Tab = "create" | "play" | "gallery" | "today";
 
 const TABS: { key: Tab; label: string }[] = [
   { key: "create", label: "Create" },
   { key: "play", label: "Play" },
   { key: "gallery", label: "Gallery" },
+  { key: "today", label: "Today" },
 ];
 
 export default function Home() {
@@ -40,6 +42,7 @@ export default function Home() {
       {tab === "create" && <CreateScreen />}
       {tab === "play" && <PlayScreen sessionId={sessionId} />}
       {tab === "gallery" && <GalleryScreen />}
+      {tab === "today" && <TodayScreen />}
     </main>
   );
 }

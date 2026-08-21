@@ -1,0 +1,75 @@
+.subtitle {
+  margin-bottom: 1.5rem;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.loading,
+.empty {
+  padding: 2.5rem 0;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.error {
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+  font-size: 0.9rem;
+  color: #7a2e22;
+  background: #fbeee9;
+  border: 1px solid #f0cfc4;
+  border-radius: 0.5rem;
+}
+
+.todayCard {
+  margin-bottom: 2.5rem;
+}
+
+.weatherLine {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--card-accent, var(--color-border));
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.85;
+}
+
+.mappingLine {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.backfilledBadge {
+  display: inline-block;
+  margin-top: 0.6rem;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--card-text, var(--color-fg));
+  background: color-mix(in srgb, var(--card-accent, var(--color-border)) 18%, transparent);
+  border: 1px solid var(--card-accent, var(--color-border));
+  border-radius: 999px;
+}
+
+.archiveHeading {
+  margin-bottom: 1rem;
+  font-family: var(--font-poem), Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 700px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
